@@ -1,0 +1,8 @@
+monthsToSearch: 3
+
+#actuator exposed end point
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics, threaddump, prometheus
