@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.retailer.demo.domain.enums.PointAmounts;
@@ -12,6 +13,7 @@ import org.retailer.demo.domain.enums.PointAmounts;
 import java.time.LocalDate;
 
 @Data
+@Builder
 @Entity
 @Table(name="spendings")
 @AllArgsConstructor

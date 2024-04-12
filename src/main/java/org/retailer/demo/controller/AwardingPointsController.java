@@ -45,6 +45,7 @@ public class AwardingPointsController {
         return ResponseEntity.ok(spendingsService.getAwardingPoints(fromDate));
     }
 
+
     @ExceptionHandler({AwardingPointsException.class, Exception.class})
     public ResponseEntity<String> exceptionHandler(Exception ex) {
         log.error(ex.getLocalizedMessage());

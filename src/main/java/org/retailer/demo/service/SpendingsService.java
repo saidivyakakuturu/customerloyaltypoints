@@ -5,6 +5,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.retailer.demo.domain.dto.AwardingPoints;
 import org.retailer.demo.domain.dto.PointsByMonth;
 import org.retailer.demo.domain.entity.Customer;
+import org.retailer.demo.domain.entity.Spendings;
 import org.retailer.demo.exception.AwardingPointsException;
 import org.retailer.demo.repository.CustomerRepository;
 import org.retailer.demo.repository.SpendingsRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 @Slf4j
@@ -81,4 +83,36 @@ public class SpendingsService {
 
         return pointsInRange;
     }
+
+    public Spendings createSpendings(Spendings spendings) {
+        return spendingsRepository.save(spendings);
+    }
+
+    public Optional<Spendings> getSpendingsById(Long id) {
+        return spendingsRepository.findById(id);
+    }
+
+    public List<Spendings> getAllSpendings() {
+        return spendingsRepository.findAll();
+    }
+
+    public Spendings updateSpendings(Long id, Spendings updatedSpendings) {
+        Optional<Spendings> existingSpendingsOptional = spendingsRepository.findById(id);
+
+        if (existingSpendingsOptional.isPresent()) {
+            Spendings existingSpendings = existingSpendingsOptional.get();
+            existingSpendings.setCustomer(updatedSpendings.getCustomer());
+            existingSpendings.setDate(updatedSpendings.getDate());
+            existingSpendings.setAmount(updatedSpendings.getAmount());
+            return spendingsRepository.save(existingSpendings);
+        } else {
+            // Handle not found case, you may throw an exception or return null/empty object
+            return null;
+        }
+    }
+
+    public void deleteSpendings(Long id) {
+        spendingsRepository.deleteById(id);
+    }
+
 }
